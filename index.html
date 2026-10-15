@@ -278,10 +278,11 @@ const norm=s=>s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").re
 const chips=document.getElementById("chips"),dl=document.getElementById("towns"),inp=document.getElementById("town"),res=document.getElementById("zres");
 towns.forEach(t=>{
  const b=document.createElement("button");b.className="chip";b.type="button";b.textContent=t;b.setAttribute("aria-pressed","false");
- b.onclick=()=>{inp.value=t;check();};chips.append(b);
+ b.onclick=()=>{if(inp)inp.value=t;check();};chips.append(b);
  const o=document.createElement("option");o.value=t;dl.append(o);
 });
 function check(){
+ if(!inp||!res)return;
  const q=norm(inp.value);if(!q){res.textContent="";return}
  const hit=towns.find(t=>norm(t)===q||(q.length>2&&norm(t).startsWith(q)));
  chips.querySelectorAll(".chip").forEach(c=>c.setAttribute("aria-pressed",String(c.textContent===hit)));
@@ -289,8 +290,8 @@ function check(){
  if(hit){res.textContent="Sí, trabajamos en "+hit+".";document.getElementById("loc").value=hit}
  else{res.innerHTML='Pregúntanos: <a href="#contacto" style="color:var(--blue)">escríbenos</a> o llama al 665 623 607.';document.getElementById("loc").value=inp.value}
 }
-document.getElementById("zbtn").onclick=check;
-inp.addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();check()}});
+document.getElementById("zbtn")?.addEventListener("click",check);
+inp?.addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();check()}});
 const nav=document.getElementById("nav"),mb=document.querySelector(".menu");
 const setMenu=o=>{nav.classList.toggle("open",o);mb.setAttribute("aria-expanded",String(o));mb.textContent=o?"Cerrar":"Menú"};
 mb.onclick=()=>setMenu(!nav.classList.contains("open"));
