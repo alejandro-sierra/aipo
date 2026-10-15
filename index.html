@@ -49,7 +49,15 @@ nav a{text-decoration:none;font-size:.93rem;font-weight:500;color:var(--ink);opa
 .btn.sm{min-height:40px;padding:0 1.1rem;font-size:.92rem}
 .btn.line{background:transparent;color:var(--blue);box-shadow:inset 0 0 0 1.5px var(--blue)}.btn.line:hover{background:var(--blue);color:#fff}
 .menu{display:none;min-height:44px;padding:0 1rem;border-radius:99px;border:0;background:transparent;color:var(--ink);font:600 .95rem var(--font);cursor:pointer}
-@media(max-width:820px){.menu{display:block}nav{position:absolute;top:64px;left:0;right:0;display:none;padding:1.2rem 1.4rem 1.5rem;border-radius:28px}nav.open{display:block}nav ul{flex-direction:column;gap:.4rem}nav a{display:block;padding:.6rem 0;font-size:1.1rem;opacity:1}.hide-m{display:none}}
+@media(max-width:820px){
+ .menu{display:block}
+ nav{position:absolute;top:calc(100% + 8px);left:0;right:0;display:none;padding:.9rem 1.2rem 1.1rem;border-radius:24px;background:rgba(255,255,255,.9);border:1px solid var(--glass-line);-webkit-backdrop-filter:blur(22px) saturate(180%);backdrop-filter:blur(22px) saturate(180%);box-shadow:0 18px 44px rgba(0,0,0,.22)}
+ nav.open{display:block}
+ nav ul{flex-direction:column;gap:.1rem}
+ nav a{display:flex;align-items:center;min-height:48px;padding:.2rem 0;font-size:1.05rem;opacity:1}
+ .hide-m{display:none}
+}
+@media(max-width:820px) and (prefers-reduced-transparency:reduce){nav{background:var(--card)}}
 /* hero */
 .hero{min-height:min(100svh,880px);padding:7rem 0 3rem;display:flex;align-items:flex-end;position:relative;color:#fff;overflow:hidden;background:linear-gradient(135deg,#232C32,#3A444B)}
 .hero img.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
@@ -134,7 +142,7 @@ footer a{color:var(--ink)}
 <header>
 <div class="bar glass">
 <a class="logo" href="#inicio" aria-label="Grupo Aipo, inicio"><img src="logo-icono.png" alt="" width="40" height="39">Grupo Aipo</a>
-<nav id="nav" class="glass" aria-label="Principal" style="background:transparent;border:0;box-shadow:none;-webkit-backdrop-filter:none;backdrop-filter:none"><ul>
+<nav id="nav" aria-label="Principal"><ul>
 <li><a href="#servicios">Servicios</a></li><li><a href="#zonas">Zonas</a></li><li><a href="#empresa">Empresa</a></li><li><a href="#contacto">Contacto</a></li>
 </ul></nav>
 <div style="display:flex;gap:.4rem;align-items:center"><a class="btn sm hide-m" href="tel:+34665623607">665 623 607</a><button class="menu" aria-expanded="false" aria-controls="nav">Menú</button></div>
@@ -266,8 +274,12 @@ function check(){
 document.getElementById("zbtn").onclick=check;
 inp.addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();check()}});
 const nav=document.getElementById("nav"),mb=document.querySelector(".menu");
-mb.onclick=()=>{const o=nav.classList.toggle("open");mb.setAttribute("aria-expanded",o)};
-nav.addEventListener("click",e=>{if(e.target.tagName==="A"){nav.classList.remove("open");mb.setAttribute("aria-expanded","false")}});
+const setMenu=o=>{nav.classList.toggle("open",o);mb.setAttribute("aria-expanded",String(o));mb.textContent=o?"Cerrar":"Menú"};
+mb.onclick=()=>setMenu(!nav.classList.contains("open"));
+nav.addEventListener("click",e=>{if(e.target.closest("a"))setMenu(false)});
+document.addEventListener("keydown",e=>{if(e.key==="Escape"&&nav.classList.contains("open")){setMenu(false);mb.focus()}});
+document.addEventListener("click",e=>{if(nav.classList.contains("open")&&!e.target.closest("#nav")&&!e.target.closest(".menu"))setMenu(false)});
+matchMedia("(min-width:821px)").addEventListener("change",e=>{if(e.matches)setMenu(false)});
 const cf=document.getElementById("cf"),cm=document.getElementById("cmsg");
 cf.addEventListener("submit",async e=>{
  e.preventDefault();cm.textContent="Enviando…";
