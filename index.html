@@ -15,7 +15,7 @@
 <meta property="og:image" content="https://grupoaipo.es/og-image.png">
 <meta name="theme-color" content="#FFFFFF">
 <link rel="icon" type="image/png" href="icon-192.png">
-<link rel="apple-touch-icon" href="icon-192.png"><rect width='100' height='100' rx='22' fill='%230071E3'/><path d='M20 78V46l30-24 30 24v32H60V56H40v22z' fill='white'/></svg>">
+<link rel="apple-touch-icon" href="icon-192.png">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"GeneralContractor","name":"Grupo Aipo","url":"https://grupoaipo.es/","logo":"https://grupoaipo.es/logo-completo.png","telephone":"+34665623607","email":"info@grupoaipo.es","address":{"@type":"PostalAddress","addressLocality":"Elche","addressRegion":"Alicante","addressCountry":"ES"},"areaServed":["Elche","Alicante","Santa Pola","San Vicente del Raspeig","Elda","Novelda","Crevillente"]}
 </script>
@@ -34,6 +34,7 @@ a{color:inherit}
 section{padding:clamp(4rem,9vw,7.5rem) 0}
 h1,h2,h3{letter-spacing:-.035em;line-height:1.05;font-weight:700}
 .skip{position:absolute;left:-999px}.skip:focus{left:1rem;top:1rem;background:var(--ink);color:var(--bg);padding:.6rem 1rem;z-index:99;border-radius:99px}
+main:focus{outline:none}
 /* glass */
 .glass{background:var(--glass);border:1px solid var(--glass-line);-webkit-backdrop-filter:blur(22px) saturate(180%);backdrop-filter:blur(22px) saturate(180%);box-shadow:0 8px 32px rgba(0,0,0,.12)}
 @media(prefers-reduced-transparency:reduce){.glass{background:var(--card);-webkit-backdrop-filter:none;backdrop-filter:none}}
@@ -62,7 +63,7 @@ nav a{text-decoration:none;font-size:.93rem;font-weight:500;color:var(--ink);opa
 .hero{min-height:min(100svh,880px);padding:7rem 0 3rem;display:flex;align-items:flex-end;position:relative;color:#fff;overflow:hidden;background:linear-gradient(135deg,#232C32,#3A444B)}
 .hero img.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.35) 0%,rgba(0,0,0,.25) 35%,rgba(0,0,0,.72) 100%)}
-.hero .wrap{position:relative;z-index:2;display:grid;grid-template-columns:1.2fr .8fr;gap:2.5rem;align-items:end}
+.hero .wrap{position:relative;z-index:2;display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:2.5rem;align-items:end}
 .hero h1{font-size:clamp(3rem,8vw,6.2rem);font-weight:750}
 .hero p.lead{margin:1.3rem 0 2rem;max-width:30rem;font-size:clamp(1.15rem,2.2vw,1.45rem);line-height:1.4;color:rgba(255,255,255,.88)}
 .cta{display:flex;flex-wrap:wrap;gap:.8rem}
@@ -78,7 +79,7 @@ nav a{text-decoration:none;font-size:.93rem;font-weight:500;color:var(--ink);opa
 .search input:focus{outline:2px solid var(--blue);border-color:transparent}
 .result{min-height:1.6rem;margin-top:.8rem;font-weight:600;font-size:.97rem}
 .result.ok{color:var(--blue)}
-@media(max-width:860px){.hero .wrap{grid-template-columns:1fr}.hero{padding-top:6.5rem}}
+@media(max-width:860px){.hero .wrap{grid-template-columns:minmax(0,1fr)}.hero{padding-top:6.5rem}}
 /* heading */
 .head{text-align:center;max-width:46rem;margin:0 auto 3.2rem}
 .head h2{font-size:clamp(2.2rem,5.4vw,3.8rem)}
@@ -116,7 +117,7 @@ nav a{text-decoration:none;font-size:.93rem;font-weight:500;color:var(--ink);opa
 .cinfo h2{font-size:clamp(2rem,4vw,2.8rem)}
 .cinfo p{color:var(--ink2);margin-top:.8rem}
 .cinfo a.big{display:block;font-size:clamp(1.7rem,3.4vw,2.3rem);font-weight:700;letter-spacing:-.03em;text-decoration:none;margin-top:1.4rem;color:var(--blue)}
-.cinfo a.sm{display:block;margin-top:.5rem;color:var(--ink2)}
+.cinfo .sm{display:block;margin-top:.5rem;color:var(--ink2)}
 form{display:grid;gap:1rem}
 .row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
 label{display:grid;gap:.4rem;font-weight:600;font-size:.92rem}
@@ -149,7 +150,7 @@ footer a{color:var(--ink)}
 </div>
 </header>
 
-<main id="main">
+<main id="main" tabindex="-1">
 <section class="hero" id="inicio" style="padding-bottom:3rem">
 <img class="bg" src="img/hero-obras-1800.jpg" srcset="img/hero-obras-750.jpg 750w, img/hero-obras-1170.jpg 1170w, img/hero-obras-1800.jpg 1800w" sizes="100vw" alt="" width="1800" height="3200" fetchpriority="high" decoding="async" onerror="this.remove()">
 <div class="wrap">
@@ -220,11 +221,11 @@ footer a{color:var(--ink)}
 <p>Te respondemos lo antes posible.</p>
 <a class="big" href="tel:+34665623607">665 623 607</a>
 <a class="sm" href="mailto:info@grupoaipo.es">info@grupoaipo.es</a>
-<a class="sm" style="pointer-events:none">Elche, Alicante</a>
+<span class="sm">Elche, Alicante</span>
 </div>
-<form name="contacto" method="POST" action="/" data-netlify="true" netlify-honeypot="bot-field" id="cf">
+<form name="contacto" method="POST" action="/" data-netlify="true" data-netlify-honeypot="bot-field" id="cf">
 <input type="hidden" name="form-name" value="contacto">
-<p class="hp"><label>No rellenar <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
+<p class="hp" aria-hidden="true"><label>No rellenar <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
 <div class="row">
 <label>Nombre<input name="nombre" required autocomplete="name"></label>
 <label>Teléfono<input name="telefono" type="tel" required autocomplete="tel"></label>
@@ -252,7 +253,7 @@ footer a{color:var(--ink)}
 <div>Reclamaciones y quejas: <a href="mailto:info@grupoaipo.es">info@grupoaipo.es</a></div>
 </div>
 </footer>
-<a class="btn call" href="tel:+34665623607" aria-label="Llamar a Grupo Aipo">Llamar ahora</a>
+<a class="btn call" href="tel:+34665623607" aria-label="Llamar ahora a Grupo Aipo">Llamar ahora</a>
 
 <script>
 const towns=["Elche","Santa Pola","Gran Alacant","Alicante","San Juan","San Vicente","Elda","Novelda","Aspe","Crevillente","Guardamar","Catral","Callosa","San Isidro","Monforte del Cid"];
