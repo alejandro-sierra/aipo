@@ -122,6 +122,7 @@ form{display:grid;gap:1rem}
 .row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
 label{display:grid;gap:.4rem;font-weight:600;font-size:.92rem}
 input,select,textarea{font:inherit;font-weight:400;min-height:48px;padding:.8rem 1rem;border:1px solid transparent;border-radius:14px;background:var(--field);color:var(--ink)}
+input::placeholder,textarea::placeholder{color:var(--ink2);opacity:.75}
 input:focus,select:focus,textarea:focus{outline:2px solid var(--blue)}
 textarea{min-height:130px;resize:vertical}
 .agree{display:flex;gap:.7rem;align-items:flex-start;font-weight:400;font-size:.9rem;color:var(--ink2)}
@@ -234,16 +235,16 @@ footer a{color:var(--ink)}
 <input type="hidden" name="form-name" value="contacto">
 <p class="hp" aria-hidden="true"><label>No rellenar <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
 <div class="row">
-<label>Nombre<input name="nombre" required autocomplete="name"></label>
-<label>Teléfono<input name="telefono" type="tel" required autocomplete="tel"></label>
+<label>Nombre<input name="nombre" required autocomplete="name" placeholder="Tu nombre"></label>
+<label>Teléfono<input name="telefono" type="tel" required autocomplete="tel" placeholder="600 000 000"></label>
 </div>
 <div class="row">
-<label>Correo electrónico<input name="email" type="email" autocomplete="email"></label>
-<label>Localidad<input name="localidad" id="loc" list="towns" autocomplete="off"></label>
+<label>Correo electrónico<input name="email" type="email" autocomplete="email" placeholder="tu@correo.com"></label>
+<label>Localidad<input name="localidad" id="loc" list="towns" autocomplete="off" placeholder="Ej. Elche"></label>
 </div>
 <label>Qué necesitas
 <select name="servicio"><option>Construcción de vivienda</option><option>Reforma</option><option>Rehabilitación de fachada o casa antigua</option><option>Escayola, mampara, toldos u otros</option><option>Aún no lo sé</option></select></label>
-<label>Mensaje<textarea name="mensaje" required></textarea></label>
+<label>Mensaje<textarea name="mensaje" required placeholder="Cuéntanos qué necesitas..."></textarea></label>
 <label class="agree"><input type="checkbox" name="privacidad" required><span>He leído y acepto la <a href="/politica-de-privacidad/">política de privacidad</a>.</span></label>
 <button class="btn" type="submit" style="justify-self:start">Enviar solicitud</button>
 <p class="msg" id="cmsg" aria-live="polite"></p>
